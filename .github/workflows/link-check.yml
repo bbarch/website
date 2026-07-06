@@ -20,6 +20,8 @@ jobs:
             --exclude 'bbarch2_download'
             --exclude 'formspree.io/f/YOUR_FORM_ID'
             --exclude 'goatcounter.com'
+             --exclude 'https://www.linkedin.com/*'
+             --exclude 'https://forms.gle/*'
             --accept 200,203,206,301,302,403,429
             './*.html'
           fail: true
