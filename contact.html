@@ -108,14 +108,15 @@
     <div class="split" style="align-items:start">
       <div data-reveal>
         <!-- To activate this form: create a free endpoint at https://formspree.io and replace YOUR_FORM_ID. -->
-        <form class="form" action="https://formspree.io/f/xykqorbd" method="POST">
+        <form id="contactForm" class="form" action="https://formspree.io/f/xykqorbd" method="POST">
           <div class="grid-2" style="gap:24px">
             <div class="field"><label for="fn">First name *</label><input id="fn" name="first_name" autocomplete="given-name" required></div>
             <div class="field"><label for="ln">Last name *</label><input id="ln" name="last_name" autocomplete="family-name" required></div>
           </div>
           <div class="field"><label for="em">Email *</label><input id="em" type="email" name="email" autocomplete="email" required></div>
           <div class="field"><label for="cm">Comment *</label><textarea id="cm" name="comment" required></textarea></div>
-          <button class="btn btn--solid" type="submit">Submit <span class="arrow">→</span></button>
+          <button class="btn btn--solid" type="submit" id="submitBtn">Submit <span class="arrow">→</span></button>
+          <p id="formStatus" style="margin-top:16px;color:#d8c3a5;"></p>
           <p class="form-note">* Indicates a required field. Prefer email? Write to us directly at <a href="mailto:info@bbarch.net">info@bbarch.net</a>.</p>
         </form>
       </div>
@@ -172,5 +173,28 @@
 <script src="js/main.js"></script>
 <!-- GoatCounter analytics (privacy-friendly). Claim the "bbarch" code at goatcounter.com, or change it below. -->
 <script data-goatcounter="https://bbarch.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+const form=document.getElementById("contactForm");
+const btn=document.getElementById("submitBtn");
+const status=document.getElementById("formStatus");
+form.addEventListener("submit",async function(e){
+e.preventDefault();
+const original=btn.innerHTML;
+btn.disabled=true;
+btn.innerHTML="Sending...";
+status.textContent="";
+try{
+const response=await fetch(form.action,{method:"POST",body:new FormData(form),headers:{"Accept":"application/json"}});
+if(response.ok){form.reset();status.textContent="✓ Thank you. Your message has been sent.";}
+else{status.textContent="Sorry, your message could not be sent. Please try again.";}
+}catch(e){status.textContent="Network error. Please try again.";}
+btn.disabled=false;
+btn.innerHTML=original;
+});
+});
+</script>
+
 </body>
 </html>
