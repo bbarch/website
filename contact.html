@@ -107,8 +107,11 @@
   <div class="wrap">
     <div class="split" style="align-items:start">
       <div data-reveal>
-        <!-- To activate this form: create a free endpoint at https://formspree.io and replace YOUR_FORM_ID. -->
-        <form id="contactForm" class="form" action="https://script.google.com/macros/s/AKfycbzIYTiZYquGrHCak7S56xVjduEdWKrq0A2LYd_81NzOZDu5M0Xhf8Tf91_NGc3EvJnq/exec" target="hidden_iframe" method="POST">
+        <form
+            id="contactForm"
+            class="form"
+            action="https://script.google.com/macros/s/AKfycbzIYTiZYquGrHCak7S56xVjduEdWKrq0A2LYd_81NzOZDu5M0Xhf8Tf91_NGc3EvJnq/exec"
+            method="POST">
           <div class="grid-2" style="gap:24px">
             <div class="field"><label for="fn">First name *</label><input id="fn" name="first_name" autocomplete="given-name" required></div>
             <div class="field"><label for="ln">Last name *</label><input id="ln" name="last_name" autocomplete="family-name" required></div>
@@ -174,25 +177,67 @@
 <!-- GoatCounter analytics (privacy-friendly). Claim the "bbarch" code at goatcounter.com, or change it below. -->
 <script data-goatcounter="https://bbarch.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
-<iframe name="hidden_iframe" style="display:none"></iframe>
-
 <script>
-document.addEventListener("DOMContentLoaded",function(){
-const form=document.getElementById("contactForm");
-const btn=document.getElementById("submitBtn");
-const status=document.getElementById("formStatus");
-const original=btn.innerHTML;
-form.addEventListener("submit",function(){
-btn.disabled=true;
-btn.innerHTML="Sending...";
-status.textContent="";
-setTimeout(function(){
-form.reset();
-btn.disabled=false;
-btn.innerHTML=original;
-status.textContent="✓ Thank you. Your message has been sent.";
-},1500);
-});
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contactForm");
+  const btn = document.getElementById("submitBtn");
+  const status = document.getElementById("formStatus");
+  const originalBtn = btn.innerHTML;
+
+  const endpoint = "https://script.google.com/macros/s/AKfycbzIYTiZYquGrHCak7S56xVjduEdWKrq0A2LYd_81NzOZDu5M0Xhf8Tf91_NGc3EvJnq/exec";
+
+  function restoreButton() {
+    btn.disabled = false;
+    btn.innerHTML = originalBtn;
+  }
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    btn.disabled = true;
+    btn.innerHTML = "Sending...";
+    status.textContent = "";
+    status.style.color = "#d8c3a5";
+
+    const data = {
+      first_name: form.first_name.value,
+      last_name: form.last_name.value,
+      email: form.email.value,
+      comment: form.comment.value
+    };
+
+    console.log(data);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(data)
+      });
+
+      console.log(response);
+
+      const json = await response.json();
+
+      console.log(json);
+
+      if (json.success === true) {
+        form.reset();
+        status.style.color = "#3a7d44";
+        status.textContent = "✓ Thank you. Your message has been sent.";
+        restoreButton();
+      } else {
+        status.style.color = "#b23a2f";
+        status.textContent = "Unable to send message.\n\n" + (json.error || "");
+        restoreButton();
+      }
+    } catch (error) {
+      console.log(error);
+      status.style.color = "#b23a2f";
+      status.textContent = "Network error.\n\nPlease try again.";
+      restoreButton();
+    }
+  });
 });
 </script>
 
