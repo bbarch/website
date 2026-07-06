@@ -1,0 +1,21 @@
+# Babbar & Babbar Architects (bbArch)
+
+> Multidisciplinary architecture practice in New Delhi, India — architects, city
+> planners, interior designers and landscape architects with over 40 years of
+> partner-led work across India, the Gulf, Mauritius and Russia. ISO 9001:2008.
+
+## Pages
+- [Home](https://www.bbarch.com/): Practice overview
+- [About](https://www.bbarch.com/about.html): History, ideology, ecological design principles
+- [Partners](https://www.bbarch.com/partners.html): Ameet Babbar, Anupama Babbar Singh, Baldev Babbar, Santosh Auluck
+- [Projects](https://www.bbarch.com/projects.html): Hotels, institutes, embassies, cultural centres, housing & townships
+- [Careers](https://www.bbarch.com/careers.html): Current openings
+- [Contact](https://www.bbarch.com/contact.html): +91 11 4470 7378 · info@bbarch.net
+
+## Machine-readable data
+- [Structured project data (JSON)](https://www.bbarch.com/data/projects.json)
+
+## Notable work
+Indian Embassy Muscat (competition win), Indian Consulate Dubai (competition win),
+FICCI Auditorium New Delhi, Hotel Park New Delhi, Sheraton Beach Resort Mauritius,
+Delhi Institute of Technology (competition win).

@@ -1,0 +1,9 @@
+/* TEAM */
+Practice: Babbar & Babbar Architects (bbArch)
+Location: New Delhi, India
+Contact: info@bbarch.net
+Site: bbArch Media Labs
+
+/* SITE */
+Stack: Static HTML/CSS/JS, GitHub Pages
+Fonts: Fraunces, Lekton (Google Fonts)

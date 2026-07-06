@@ -1,0 +1,9 @@
+# Security headers — applied automatically on Cloudflare Pages / Netlify.
+# GitHub Pages ignores this file; kept so a future migration needs no site changes.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://gc.zgo.at; connect-src 'self' https://bbarch.goatcounter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; form-action https://formspree.io 'self'; frame-ancestors 'none'; base-uri 'self'
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY

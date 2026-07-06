@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "organization": {
+    "name": "Babbar & Babbar Architects",
+    "alternateName": "bbArch",
+    "url": "https://www.bbarch.com",
+    "location": "New Delhi, India",
+    "founded": "c. 1980",
+    "certification": "ISO 9001:2008",
+    "disciplines": ["Architecture", "City Planning", "Interior Design", "Landscape Architecture"],
+    "telephone": "+91-11-4470-7378",
+    "email": "info@bbarch.net"
+  },
+  "team": [
+    { "name": "Ameet Babbar", "role": "Managing Partner", "professions": ["Architect", "Landscape Architect"], "credentials": ["Dip.Arch. (New Delhi)", "M.L.Arch. (SPA, New Delhi)", "Fellow, Indian Institute of Architects", "Fellow, Indian Society of Landscape Architects"] },
+    { "name": "Anupama Babbar Singh", "role": "Partner", "professions": ["Architect", "General Manager"], "credentials": ["B.Arch.", "MBA (Delhi School of Economics)"] },
+    { "name": "Baldev Babbar", "role": "Founder", "professions": ["Architect", "Town Planner"], "credentials": ["B.Arch. (SPA, New Delhi)", "PG Dip. T.P. (Leeds, UK)", "Fellow, Indian Institute of Architects"] },
+    { "name": "Santosh Auluck", "role": "Senior Consultant", "professions": ["Architect", "Planner"], "credentials": ["B.Arch. (SPA, New Delhi)", "Fellow, Indian Institute of Architects"] }
+  ],
+  "awards": [
+    { "name": "Indian Consulate, Dubai", "type": "Design competition won" },
+    { "name": "Azad Bhawan Auditorium, ICCR", "type": "Design competition won" },
+    { "name": "Indian Embassy Complex, Muscat", "type": "Design competition won" },
+    { "name": "Delhi Institute of Technology, Dwarka", "type": "Design competition won" },
+    { "name": "Nizampur Indoor Stadium, MCD", "type": "Design competition won" }
+  ],
+  "projectCategories": [
+    {
+      "id": "hotels", "name": "Hotels & Hospitality",
+      "projects": ["Hotel Holiday Inn, Bombay", "Hotel Holiday Inn, Agra (now Hotel Tajview)", "Beach Resort Sheraton Hotel, Mauritius", "Hotel Ashok Brahmaputra, Gauhati", "Hotel Hindustan International, Varanasi", "Hotel Banjara, Hyderabad", "Hotel Park, Parliament Street, New Delhi", "Hotel Gorbandh Palace, Jaisalmer"]
+    },
+    {
+      "id": "institutes", "name": "Institutes & Educational",
+      "projects": ["Delhi Institute of Technology", "Jawaharlal Nehru University, New Delhi", "Institute for Mass Communication, New Delhi", "Management Training Institute for SAIL, Ranchi", "College of Vocational Studies, University of Delhi", "Laxmi Bai College, University of Delhi", "Swimming pool, Apeejay School, Sheikh Sarai", "Extension to The British School, New Delhi", "Jagran Public School, Lucknow", "Jagran Public School, Noida", "Various schools for Delhi Government / PWD Delhi"]
+    },
+    {
+      "id": "cultural", "name": "Cultural Centres & Embassies",
+      "projects": ["Indian Embassy, Muscat, Oman", "Indian Consulate, Dubai, UAE", "Community Centre, Pitampura, New Delhi (DDA)", "Auditorium, FICCI, New Delhi", "Extension to Bhartiya Kala Kendra, New Delhi", "Auditorium, Lady Shri Ram College for Women, New Delhi", "Sanatorium, Russia (interior design)", "Auditorium, Apeejay School, Sheikh Sarai", "Auditorium for ICCR at Azad Bhawan, ITO, New Delhi", "Indoor Stadium for MCD at Nizampur, Delhi"]
+    },
+    {
+      "id": "housing", "name": "Housing & Townships",
+      "projects": ["DLF Group Housing, Qutab Enclave, Gurgaon", "Surya Enclave, Gurgaon (Omega Commercial Pvt Ltd)", "Group Housing, Bijwasan (Dalmia Dairy Industries)", "Group Housing, Patparganj (Anandlok CGHS)", "Group Housing, Salt Lake, Calcutta (AWHO)", "Housing for Delhi Diocese, New Delhi", "Aashray Group Housing Society, Gurgaon", "Housing for JNU, Sector XIII, JNU Campus", "Township for Bihar Alloy Steel Ltd., Ranchi", "Private high-end bungalows at Jorbagh, Panchsheel, Vasant Vihar & Gurgaon"]
+    }
+  ]
+}

@@ -1,48 +1,56 @@
-# bbArch — Babbar &amp; Babbar Architects
+# bbArch — Babbar & Babbar Architects
 
-A refined, minimalist single-page redesign of [bbarch2.com](http://www.bbarch2.com), built to be dropped straight onto GitHub Pages (or any static host). No build step, no framework, no dependencies — just HTML, CSS and a little vanilla JavaScript.
+Production-grade v2 of [bbarch2.com](http://www.bbarch2.com): a dark, cinematic, multi-page static site built for GitHub Pages. No build step, no framework — HTML, CSS and vanilla JavaScript, with CI quality gates.
 
-## Structure
+## Pages
 
-The whole site is one scrolling page — **`index.html`** — with anchored sections: Home, About, Partners, Projects (+ gallery + recognition), Careers, and Contact. The top navigation and footer links scroll smoothly to each section.
+`index.html` · `about.html` · `partners.html` · `projects.html` · `careers.html` · `contact.html` · `404.html`
 
-`about.html`, `partners.html`, `projects.html`, `careers.html` and `contact.html` are kept only as tiny redirect stubs pointing at the matching section (so any old deep links still work); they can be deleted if you don't need them.
+All original text, project lists, partner bios and contact details carried forward from the current site. Every page has full SEO treatment: unique title & description, canonical URL, Open Graph + Twitter cards, and Schema.org JSON-LD (Organization/ProfessionalService, BreadcrumbList, Person, ItemList).
 
-All original text, project lists, partner bios, contact details and links were carried forward from the current site.
+## Design
 
-### Typography &amp; logo
-The site is set in **Lekton** — a free Google Fonts typewriter-style face — used site-wide for headings and body. The **bbArch "bba" logo** appears in the header and footer; it's rendered from `images/logo-mask.png` as a CSS mask so it automatically takes the correct colour (dark on light, light on dark) in every context.
+Dark cinematic direction: near-black canvas, Fraunces display serif with brass italic accents, Lekton mono for meta, film grain, kinetic line-reveal typography, parallax image bands, magnetic buttons, custom cursor, fullscreen menu. Motion fully disabled for `prefers-reduced-motion`.
 
-## Deploy to GitHub Pages
+Detail imagery in `images/details/` consists of zoomed crops from **bbArch's own photography** (FICCI lattice ceiling, atrium marble, lobby relief, Hotel Park facade) — no third-party buildings. To optionally add true royalty-free stock textures (Unsplash license), run `bash scripts/fetch-stock-details.sh` locally.
 
-1. Create a new repository on GitHub (e.g. `bbarch-website`).
-2. Upload every file in this folder to the repo (keep the folder structure: `css/`, `js/`, `images/`).
-3. In the repo, go to **Settings → Pages**.
-4. Under **Build and deployment → Source**, choose **Deploy from a branch**, select the `main` branch and the `/ (root)` folder, then **Save**.
-5. Your site goes live at `https://<username>.github.io/<repo>/` within a minute or two.
+All photos ship with WebP counterparts (`<picture>` fallback to JPEG), explicit `width`/`height`, and lazy loading.
 
-The included `.nojekyll` file tells GitHub Pages to serve everything as-is.
+## Repository infrastructure
 
-### Custom domain (optional)
-To use `bbarch.com` (or similar), add a file named `CNAME` containing just your domain, then point your DNS to GitHub Pages per their docs.
+```
+.github/
+├── workflows/
+│   ├── deploy.yml           # builds artifact (excludes archive/dev files) → GitHub Pages
+│   ├── html-validation.yml  # W3C HTML + CSS validation on every push/PR
+│   ├── lighthouse.yml       # PRs fail if Perf < 90, A11y < 95, SEO < 95
+│   ├── link-check.yml       # lychee broken-link check, weekly + on push
+│   └── security.yml         # gitleaks secret scan + dependency review
+├── ISSUE_TEMPLATE/          # bug report, content update
+├── PULL_REQUEST_TEMPLATE.md
+├── lighthouserc.json
+└── dependabot.yml           # weekly GitHub Actions updates
+```
 
-## Images
+Also included: `robots.txt`, `sitemap.xml`, `llms.txt` (AI readiness), `data/projects.json` (machine-readable project/team/award data), `humans.txt`, `site.webmanifest`, `browserconfig.xml`, favicons, `CNAME` (www.bbarch.com), `.nojekyll`, and `_headers` (CSP/HSTS/etc — inert on GitHub Pages, activates automatically on a future Cloudflare Pages/Netlify migration).
 
-All images are bundled locally in the `images/` folder, so the site is fully self-contained with **no dependency on the old host**. If any image is ever missing, it falls back gracefully to a styled placeholder. To swap a photo, just replace the file in `images/` (keep the same filename) or update the `src` in the relevant `.html` file.
+## Deploy
 
-## Contact form
+1. Create a GitHub repository and push this folder (the included `deploy.yml` handles publishing — in repo **Settings → Pages** set Source to **GitHub Actions**).
+2. Point DNS for `www.bbarch.com` at GitHub Pages (CNAME record → `<username>.github.io`); the `CNAME` file is already in place.
+3. Suggested branch model: `main` → production, `beta` → staging (`beta.bbarch.com` via a second repo or Pages environment), `feature/*` for work.
 
-The inquiry form on `contact.html` is wired for [Formspree](https://formspree.io) (free tier). To activate it:
-1. Create a form at formspree.io and copy your form ID.
-2. In `contact.html`, replace `YOUR_FORM_ID` in the form's `action` with your ID.
+`bbarch2_download/` (the old-site archive) and `scripts/` are excluded from the published site by the deploy workflow.
 
-Until then, visitors can still reach the studio via the phone number and email shown on the page. The careers page submits through the existing Google Form.
+## Go-live checklist (manual, one-time)
+
+- [ ] **Contact form** — create a free endpoint at [formspree.io](https://formspree.io) and replace `YOUR_FORM_ID` in `contact.html`.
+- [ ] **Analytics** — claim code `bbarch` at [goatcounter.com](https://www.goatcounter.com) (or edit the snippet at the bottom of each HTML page). Phone clicks, email clicks and careers applications are tracked as events automatically.
+- [ ] **Search engines** — verify the site in [Google Search Console](https://search.google.com/search-console) and [Bing Webmaster Tools](https://www.bing.com/webmasters), then submit `https://www.bbarch.com/sitemap.xml`.
 
 ## Customising
 
-- **Colours & type:** edit the CSS variables at the top of `css/style.css` (`--accent`, `--ink`, `--paper`, fonts).
-- **Copy:** all text lives directly in the HTML files.
-- **Motion:** scroll-reveal and effects are in `js/main.js`; motion is automatically reduced for users who prefer it.
+Colours and type: CSS variables at the top of `css/style.css` (`--brass`, `--char`, `--bone`, fonts). Copy lives directly in the HTML. Motion and analytics events: `js/main.js`.
 
 ---
 © bbArch · ISO 9001:2008 Company · New Delhi

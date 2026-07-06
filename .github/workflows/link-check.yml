@@ -1,0 +1,25 @@
+name: Link Check
+
+on:
+  push:
+    branches: [main, beta, develop]
+  pull_request:
+  schedule:
+    - cron: '0 6 * * 1'   # weekly, Monday 06:00 UTC
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --include-fragments
+            --exclude 'bbarch2_download'
+            --exclude 'formspree.io/f/YOUR_FORM_ID'
+            --exclude 'goatcounter.com'
+            --accept 200,203,206,301,302,403,429
+            './*.html'
+          fail: true

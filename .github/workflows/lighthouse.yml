@@ -1,0 +1,24 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Serve site
+        run: npx --yes serve -l 8080 . &
+      - name: Wait for server
+        run: npx --yes wait-on http://localhost:8080
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:8080/
+            http://localhost:8080/projects.html
+            http://localhost:8080/contact.html
+          configPath: .github/lighthouserc.json
+          uploadArtifacts: true

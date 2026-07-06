@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /bbarch2_download/
+
+Sitemap: https://www.bbarch.com/sitemap.xml
