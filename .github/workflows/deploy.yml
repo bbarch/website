@@ -25,7 +25,7 @@ jobs:
           rsync -a --exclude '_site' --exclude '.git*' --exclude 'bbarch2_download' \
                 --exclude 'scripts' --exclude 'CLAUDE.md' --exclude 'node_modules' \
                 ./ _site/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
