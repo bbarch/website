@@ -1,0 +1,12 @@
+# Old site download — source material, not part of the deployed site
+bbarch2_download/
+
+# Not needed on the live site
+CLAUDE.md
+fonts/
+images/logo-mask.png
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
