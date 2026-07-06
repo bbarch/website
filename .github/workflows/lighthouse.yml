@@ -8,7 +8,7 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Serve site
         run: npx --yes serve -l 8080 . &
       - name: Wait for server
