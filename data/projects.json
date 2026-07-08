@@ -6,40 +6,68 @@
     "url": "https://www.bbarch.com",
     "location": "New Delhi, India",
     "founded": "c. 1980",
+    "history": "Over 45 years of practice",
     "certification": "ISO 9001:2008",
     "disciplines": ["Architecture", "City Planning", "Interior Design", "Landscape Architecture"],
     "telephone": "+91-11-4470-7378",
     "email": "info@bbarch.net"
   },
   "team": [
-    { "name": "Ameet Babbar", "role": "Managing Partner", "professions": ["Architect", "Landscape Architect"], "credentials": ["Dip.Arch. (New Delhi)", "M.L.Arch. (SPA, New Delhi)", "Fellow, Indian Institute of Architects", "Fellow, Indian Society of Landscape Architects"] },
-    { "name": "Anupama Babbar Singh", "role": "Partner", "professions": ["Architect", "General Manager"], "credentials": ["B.Arch.", "MBA (Delhi School of Economics)"] },
-    { "name": "Baldev Babbar", "role": "Founder", "professions": ["Architect", "Town Planner"], "credentials": ["B.Arch. (SPA, New Delhi)", "PG Dip. T.P. (Leeds, UK)", "Fellow, Indian Institute of Architects"] },
+    { "name": "Ameet Babbar", "role": "Managing Partner", "professions": ["Architect", "Landscape Architect"], "experienceYears": 25, "credentials": ["Dip.Arch. (New Delhi)", "M.L.Arch. — Postgraduate Landscape Architect (SPA, New Delhi)", "Fellow, Indian Institute of Architects", "Fellow, Indian Society of Landscape Architects", "International Associate, American Institute of Architects"] },
+    { "name": "Anupama Babbar Singh", "role": "Partner", "professions": ["Architect", "MBA (HR)"], "experienceYears": 29, "credentials": ["B.Arch.", "MBA / Postgraduate (Delhi School of Economics)", "Registered, Council of Architecture", "Associate, Indian Institute of Architects"] },
+    { "name": "Baldev Babbar", "role": "Founder Partner (retired 2021)", "professions": ["Architect", "Town Planner"], "credentials": ["B.Arch. (SPA, New Delhi)", "Masters in Town Planning (Leeds, UK)", "Fellow, Indian Institute of Architects"] },
     { "name": "Santosh Auluck", "role": "Senior Consultant", "professions": ["Architect", "Planner"], "credentials": ["B.Arch. (SPA, New Delhi)", "Fellow, Indian Institute of Architects"] }
   ],
   "awards": [
-    { "name": "Indian Consulate, Dubai", "type": "Design competition won" },
-    { "name": "Azad Bhawan Auditorium, ICCR", "type": "Design competition won" },
-    { "name": "Indian Embassy Complex, Muscat", "type": "Design competition won" },
-    { "name": "Delhi Institute of Technology, Dwarka", "type": "Design competition won" },
-    { "name": "Nizampur Indoor Stadium, MCD", "type": "Design competition won" }
+    { "name": "Delhi Institute of Technology (now NSIT), Dwarka", "type": "First Prize — design competition" },
+    { "name": "Indian Consulate & Consul General's Residence, Dubai, UAE", "type": "First Prize — design competition" },
+    { "name": "Indian Embassy & Ambassador's Residence, Muscat, Oman", "type": "First Prize — design competition" },
+    { "name": "Azad Bhawan Auditorium Refurbishment, ICCR, New Delhi", "type": "First Prize — design competition" },
+    { "name": "District Courts Complex, Dwarka", "type": "Direct award" },
+    { "name": "JNU University Masterplan", "type": "Second Prize" },
+    { "name": "Indian Institute of Mass Communication, JNU", "type": "Direct award" }
+  ],
+  "featuredProjects": [
+    { "name": "District Courts Complex, Dwarka, New Delhi", "client": "High Court of Delhi", "agency": "Delhi PWD", "siteArea": "9 acres", "builtUpArea": "75,000 sq.m.", "cost": "Rs. 120.0 Crores", "completed": "2008 (first three floors)", "scope": "Architecture, Interiors, Engineering, Landscape, Periodic Supervision" },
+    { "name": "Indian Embassy Complex, Muscat, Oman", "client": "Ministry of External Affairs, New Delhi", "agency": "CPWD", "siteArea": "3 acres", "builtUpArea": "10,000 sq.m.", "cost": "Rs. 40.0 Crores", "completed": "2008 (inaugurated by the Foreign Minister)", "scope": "Architecture, Interiors, Engineering, Landscape, Project Management" },
+    { "name": "Additional Courts, Rohini District Courts, Delhi", "client": "High Court of Delhi", "agency": "Delhi PWD", "siteArea": "30,000 sq.m.", "builtUpArea": "15,000 sq.m.", "cost": "Rs. 150.0 Crores", "scope": "Architecture, Interiors, Engineering, Landscape, Periodic Supervision" }
   ],
   "projectCategories": [
     {
       "id": "hotels", "name": "Hotels & Hospitality",
-      "projects": ["Hotel Holiday Inn, Bombay", "Hotel Holiday Inn, Agra (now Hotel Tajview)", "Beach Resort Sheraton Hotel, Mauritius", "Hotel Ashok Brahmaputra, Gauhati", "Hotel Hindustan International, Varanasi", "Hotel Banjara, Hyderabad", "Hotel Park, Parliament Street, New Delhi", "Hotel Gorbandh Palace, Jaisalmer"]
+      "projects": ["Hotel Holiday Inn, Bombay", "Hotel Holiday Inn, Agra (now Hotel Tajview)", "Beach Resort Sheraton Hotel, Mauritius", "Hotel Ashok Brahmaputra, Gauhati", "Hotel Hindustan International, Varanasi", "Hotel Banjara, Hyderabad", "Hotel Park, Parliament Street, New Delhi", "Hotel Gorbandh Palace, Jaisalmer", "Planet Hollywood, South Goa"]
     },
     {
-      "id": "institutes", "name": "Institutes & Educational",
-      "projects": ["Delhi Institute of Technology", "Jawaharlal Nehru University, New Delhi", "Institute for Mass Communication, New Delhi", "Management Training Institute for SAIL, Ranchi", "College of Vocational Studies, University of Delhi", "Laxmi Bai College, University of Delhi", "Swimming pool, Apeejay School, Sheikh Sarai", "Extension to The British School, New Delhi", "Jagran Public School, Lucknow", "Jagran Public School, Noida", "Various schools for Delhi Government / PWD Delhi"]
-    },
-    {
-      "id": "cultural", "name": "Cultural Centres & Embassies",
-      "projects": ["Indian Embassy, Muscat, Oman", "Indian Consulate, Dubai, UAE", "Community Centre, Pitampura, New Delhi (DDA)", "Auditorium, FICCI, New Delhi", "Extension to Bhartiya Kala Kendra, New Delhi", "Auditorium, Lady Shri Ram College for Women, New Delhi", "Sanatorium, Russia (interior design)", "Auditorium, Apeejay School, Sheikh Sarai", "Auditorium for ICCR at Azad Bhawan, ITO, New Delhi", "Indoor Stadium for MCD at Nizampur, Delhi"]
+      "id": "commercial", "name": "Office & Commercial Buildings",
+      "projects": ["Commercial / Shopping Centre, Sanjay Nagar, Ghaziabad", "Bus Terminus & Commercial Complex, Ghaziabad", "Commercial / Shopping Centre, Wazirpur District Centre (Big Jos Estates)", "Commercial / Shopping Centre, Wazirpur District Centre (HB Estates)", "Office Building for Indian Ports Association, New Delhi", "Office for Wipro Biomed, Gurgaon", "District Centre, Pitampura (DDA)", "Indian Consulate, Dubai, UAE"]
     },
     {
       "id": "housing", "name": "Housing & Townships",
-      "projects": ["DLF Group Housing, Qutab Enclave, Gurgaon", "Surya Enclave, Gurgaon (Omega Commercial Pvt Ltd)", "Group Housing, Bijwasan (Dalmia Dairy Industries)", "Group Housing, Patparganj (Anandlok CGHS)", "Group Housing, Salt Lake, Calcutta (AWHO)", "Housing for Delhi Diocese, New Delhi", "Aashray Group Housing Society, Gurgaon", "Housing for JNU, Sector XIII, JNU Campus", "Township for Bihar Alloy Steel Ltd., Ranchi", "Private high-end bungalows at Jorbagh, Panchsheel, Vasant Vihar & Gurgaon"]
+      "projects": ["DLF Group Housing, Qutab Enclave, Gurgaon", "Group Housing, Gurgaon (Omega Commercial Pvt Ltd)", "Group Housing, Bijwasan (Dalmia Dairy Industries)", "Group Housing, Patparganj (Anandlok CGHS)", "Group Housing, Salt Lake, Calcutta (AWHO)", "Housing for Delhi Diocese, New Delhi", "Aashray Group Housing Society, Gurgaon", "Housing for JNU, Sector XIII, JNU Campus"]
+    },
+    {
+      "id": "institutes", "name": "Institutes & Educational",
+      "projects": ["Delhi Institute of Technology, Dwarka", "Jawaharlal Nehru University, New Delhi", "Institute for Mass Communication, New Delhi", "Management Training Institute for SAIL, Ranchi", "College of Vocational Studies, New Delhi", "Jagran Public School, Noida & Lucknow"]
+    },
+    {
+      "id": "cultural", "name": "Cultural Centres & Embassies",
+      "projects": ["Community Centre, Pitampura, New Delhi (DDA)", "District Courts Complex, Dwarka (Delhi High Court)", "Auditorium, FICCI, New Delhi", "Extension to Bhartiya Kala Kendra, New Delhi", "Auditorium, Lady Shri Ram College for Women, New Delhi", "Sanatorium, Russia (interior design)", "Auditorium, Apeejay School, Sheikh Sarai, New Delhi", "Indian Embassy & Ambassador's Residence, Muscat, Oman"]
+    },
+    {
+      "id": "industrial", "name": "Industrial Buildings",
+      "projects": ["Factory, Rudarpur, Nainital (Shriram Honda Power Equipment)", "Factory, Ludhiana (Vardhaman Spinning & Weaving Mills, Oswal Group)", "Factory, Patparganj (Mr. Singhania)", "Flatted Factory Complex, 120 units (Udyog Sheel Mahila Sehkari Samiti), New Delhi", "Printing Presses for Dainik Jagran, Noida / Mohali / Ludhiana"]
+    },
+    {
+      "id": "international", "name": "International Projects",
+      "projects": ["Airport, Libya", "Indian Consulate, Dubai, UAE", "Indian Embassy, Muscat, Oman", "Burnham Beeches, London, UK", "66 Luxury Villas, Muscat Hills Golf & Country Club, Muscat", "Aluminium Rolling Mill, Sohar, Oman", "Aluminium Downstream Plant (Future Metals), Sohar, Oman", "12 Office, commercial & residential buildings, Muscat (MHD)", "Bird Song Villa, Crowne Plaza Heights, Muscat", "Villa for H.E. Madam Lujaina, Seeb, Oman", "Training & Development Institute, Darsait, Oman", "Lulu Hypermarket, Sohar & Nizwa"]
+    },
+    {
+      "id": "landscape", "name": "Landscape Projects",
+      "projects": ["Indian Embassy, Muscat (Ministry of External Affairs)", "District Courts Complex, Dwarka, Papankalan (PWD, Govt of NCT of Delhi)", "Landscape Conservation, Khajuraho (INTACH / HHT Projects, UK)", "Extension to The British School, Chanakyapuri, New Delhi", "DDA Community Centre, Pitampura Block K(P), New Delhi", "Landscape & Masterplanning, Jagran Public Schools, Noida & Lucknow", "Restoration of the Lost Gardens of Khajuraho (INTACH / INTACH Belgium)", "Garden of the Great Arc, Dehradun (Survey of India)", "Maurya Group Housing Society, Patparganj, New Delhi", "UMSS Flatted Factory Complex, Mathura Road, Okhla, New Delhi", "India Garden & Pavilion, Royal Flora, Bangkok (INTACH)", "Local Area Plans, Vasant Vihar & Karol Bagh (MCD)", "\"Living the Living Heritage\" Khajuraho Exhibition, Festival of India, Bozar, Brussels"]
+    },
+    {
+      "id": "recent", "name": "Recent & Ongoing Works",
+      "projects": ["Additional Courts, Rohini District Courts, Delhi", "Indoor Stadium, Nizampur (MCD), Delhi", "Muscat Hills Commercial Precinct, Muscat", "Villas at Muscat Hills, Muscat", "Doctors' Farmhouse, New Delhi", "Wadhwa Residence, New Delhi", "S7 Residence, New Delhi", "The Chalet Banquets, Amritsar", "KCP Commercial Building, Filmistan", "Springdales Public School, Yamuna Nagar", "Sarada Tapovan, Rishikesh", "Vayu @ KVD Windpark, Greater Noida", "BIRA Office, New Delhi (interiors)", "REDPro Office, New Delhi (interiors)", "Council of Architecture, Okhla (interiors)", "IFC Terrace, New Delhi (landscape)"]
     }
   ]
 }
