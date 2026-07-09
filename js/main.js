@@ -3,26 +3,43 @@
   "use strict";
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Preloader ---------- */
-  var loader = document.querySelector(".loader");
-  if (loader) {
-    var seen = sessionStorage.getItem("bb-seen");
-    if (seen || reduced) {
-      loader.remove();
-    } else {
-      var pct = loader.querySelector(".pct");
-      var n = 0;
-      var t = setInterval(function () {
-        n = Math.min(100, n + Math.ceil(Math.random() * 22));
-        if (pct) pct.textContent = String(n).padStart(3, "0") + " %";
-        if (n >= 100) {
-          clearInterval(t);
-          loader.classList.add("done");
-          sessionStorage.setItem("bb-seen", "1");
-          setTimeout(function () { loader.remove(); }, 1000);
-        }
-      }, 120);
+  /* ---------- Scroll intro: logo on a solid page, rotates + glides to the corner on scroll ---------- */
+  var intro = document.getElementById("intro");
+  if (intro && !reduced) {
+    var introLogo = document.getElementById("introLogo");
+    var introBrand = document.querySelector(".site-header .brand img");
+    document.body.classList.add("introjs");
+    var geo = null;
+    function introMeasure() {
+      var prev = introLogo.style.transform;
+      introLogo.style.transform = "none";
+      var c = introLogo.getBoundingClientRect();
+      introLogo.style.transform = prev;
+      var h = introBrand.getBoundingClientRect();
+      geo = {
+        dx: (h.left + h.width / 2) - (c.left + c.width / 2),
+        dy: (h.top + h.height / 2) - (c.top + c.height / 2),
+        s: h.height / c.height
+      };
     }
+    function introFrame() {
+      if (!geo || !geo.s) introMeasure();
+      var range = intro.offsetHeight - window.innerHeight;
+      var p = range > 0 ? Math.min(1, Math.max(0, window.scrollY / range)) : 1;
+      introLogo.style.transform =
+        "translate(" + (geo.dx * p) + "px," + (geo.dy * p) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (geo.s - 1) * p) + ")";
+      var end = p > 0.98;
+      introLogo.style.opacity = end ? "0" : "1";
+      document.body.classList.toggle("header-in", p > 0.45);
+      document.body.classList.toggle("logo-in", end);
+    }
+    var introTick = false;
+    window.addEventListener("scroll", function () {
+      if (!introTick) { requestAnimationFrame(function () { introFrame(); introTick = false; }); introTick = true; }
+    }, { passive: true });
+    window.addEventListener("resize", function () { geo = null; introFrame(); });
+    setTimeout(introFrame, 60);
+    introFrame();
   }
 
   /* ---------- Theme toggle (dark / light) ---------- */
