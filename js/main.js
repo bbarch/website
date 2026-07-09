@@ -11,6 +11,7 @@
     var introCap = document.getElementById("introCap");
     document.body.classList.add("introjs");
     var geo = null;
+    var introPin = intro.querySelector(".intro__pin");
     function introMeasure() {
       var prev = introLogo.style.transform;
       introLogo.style.transform = "none";
@@ -20,13 +21,13 @@
       geo = {
         dx: (h.left + h.width / 2) - (c.left + c.width / 2),
         dy: (h.top + h.height / 2) - (c.top + c.height / 2),
-        s: h.height / c.height
+        s: h.height / c.height,
+        range: Math.max(1, intro.offsetHeight - introPin.offsetHeight)
       };
     }
     function introFrame() {
       if (!geo || !geo.s) introMeasure();
-      var range = intro.offsetHeight - window.innerHeight;
-      var p = range > 0 ? Math.min(1, Math.max(0, window.scrollY / range)) : 1;
+      var p = Math.min(1, Math.max(0, window.scrollY / geo.range));
       introLogo.style.transform =
         "translate(" + (geo.dx * p) + "px," + (geo.dy * p) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (geo.s - 1) * p) + ")";
       var end = p > 0.98;
