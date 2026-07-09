@@ -32,9 +32,9 @@
   --char:#f5f3ec;
   --char-2:#eceadf;
   --char-3:#e5e2d6;
-  --bone:#1b1a16;
-  --bone-dim:#4c4a41;
-  --muted:#78756b;
+  --bone:#191811;
+  --bone-dim:#33312b;
+  --muted:#4a4842;
   --brass:#c0392b;
   --brass-soft:rgba(192,57,43,.4);
   --line:rgba(24,22,18,.16);
@@ -564,3 +564,14 @@ body.menu-open .menu nav a{opacity:1;transform:none}
 [data-theme="light"] .gcard img{filter:grayscale(.18) contrast(1.02) brightness(.96)}
 [data-theme="light"] .gcard--feature img{filter:grayscale(0) contrast(1.02) brightness(1)}
 [data-theme="light"] .strip img{filter:grayscale(.12) brightness(1)}
+
+/* ---------- Light theme: stronger veil under hero text for legibility ---------- */
+[data-theme="light"] .hero__bg::after{
+  background:linear-gradient(180deg,rgba(245,243,236,.12) 0%,rgba(245,243,236,.12) 24%,rgba(245,243,236,.62) 56%,rgba(245,243,236,.94) 84%,#f5f3ec 100%);
+}
+[data-theme="light"] .prj-hero__bg::after{
+  background:linear-gradient(180deg,rgba(245,243,236,.12) 0%,rgba(245,243,236,.12) 22%,rgba(245,243,236,.6) 52%,rgba(245,243,236,.93) 82%,#f5f3ec 100%);
+}
+[data-theme="light"] .phero__bg::after{
+  background:linear-gradient(180deg,rgba(245,243,236,.4),#f5f3ec);
+}
