@@ -383,12 +383,16 @@ body.menu-open .menu nav a{opacity:1;transform:none}
 }
 
 /* ---------- Project list: items with a detail page ---------- */
-.pcat__list li.has-page>a{color:inherit;display:block}
+.pcat__list li.has-page>a{
+  color:var(--brass);text-decoration:underline;
+  text-decoration-color:var(--brass-soft);text-underline-offset:4px;text-decoration-thickness:1px;
+  transition:color .3s,text-decoration-color .3s;
+}
+.pcat__list li.has-page>a:hover{color:var(--brass);text-decoration-color:var(--brass)}
 .pcat__list li.has-page::after{
   content:"\2197";width:auto;height:auto;background:none;border-radius:0;
-  font-family:var(--f-mono);font-size:.9em;line-height:1;color:var(--brass);opacity:.6;
+  font-family:var(--f-mono);font-size:.9em;line-height:1;color:var(--brass);opacity:.75;
 }
-.pcat__list li.has-page:hover{color:var(--bone)}
 .pcat__list li.has-page:hover::after{opacity:1}
 
 /* ---------- Project detail page ---------- */
