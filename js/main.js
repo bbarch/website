@@ -25,6 +25,24 @@
     }
   }
 
+  /* ---------- Theme toggle (dark / light) ---------- */
+  var root = document.documentElement;
+  function syncMeta() {
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute("content", root.getAttribute("data-theme") === "light" ? "#f5f3ec" : "#0b0b09");
+  }
+  syncMeta();
+  var themeBtn = document.querySelector(".theme-btn");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("bb-theme", next); } catch (e) {}
+      themeBtn.setAttribute("aria-pressed", next === "light" ? "true" : "false");
+      syncMeta();
+    });
+  }
+
   /* ---------- Header state + progress ---------- */
   var header = document.querySelector(".site-header");
   var progress = document.querySelector(".progress");

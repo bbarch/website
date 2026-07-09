@@ -26,8 +26,9 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..420;1,9..144,300..420&family=Lekton:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script>try{var _t=localStorage.getItem('bb-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -57,10 +58,13 @@
   <a class="brand" href="index.html" aria-label="bbArch — Babbar &amp; Babbar Architects home">
     <img src="images/logo-light.png" alt="bbArch" width="427" height="150" style="height:34px;width:auto">
   </a>
-  <button class="menu-btn" aria-expanded="false" aria-controls="menu">
-    <span class="menu-label">Menu</span>
-    <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
-  </button>
+  <div class="header-tools">
+    <button class="theme-btn" type="button" aria-label="Toggle light or dark theme" title="Toggle theme"><span class="theme-ico" aria-hidden="true"></span></button>
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu">
+      <span class="menu-label">Menu</span>
+      <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
 </header>
 
 <div class="menu" id="menu">
