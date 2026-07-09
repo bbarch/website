@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.bbarch.com/</loc><lastmod>2026-07-06</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.bbarch.com/about.html</loc><lastmod>2026-07-06</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.bbarch.com/partners.html</loc><lastmod>2026-07-06</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.bbarch.com/projects.html</loc><lastmod>2026-07-06</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.bbarch.com/careers.html</loc><lastmod>2026-07-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.bbarch.com/contact.html</loc><lastmod>2026-07-06</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.bbarch.com/</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.bbarch.com/about.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/partners.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/projects.html</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.bbarch.com/careers.html</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.bbarch.com/contact.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.bbarch.com/project-embassy-muscat.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/project-district-courts-dwarka.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/project-dit-dwarka.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/project-garden-great-arc.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/project-indoor-stadium-nizampur.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/project-lost-gardens-khajuraho.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/project-gulf-college-muscat.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.bbarch.com/project-muscat-hills-villas.html</loc><lastmod>2026-07-09</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
 </urlset>
