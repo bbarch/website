@@ -8,6 +8,7 @@
   if (intro && !reduced) {
     var introLogo = document.getElementById("introLogo");
     var introBrand = document.querySelector(".site-header .brand img");
+    var introCap = document.getElementById("introCap");
     document.body.classList.add("introjs");
     var geo = null;
     function introMeasure() {
@@ -30,6 +31,7 @@
         "translate(" + (geo.dx * p) + "px," + (geo.dy * p) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (geo.s - 1) * p) + ")";
       var end = p > 0.98;
       introLogo.style.opacity = end ? "0" : "1";
+      if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 3).toFixed(3);
       document.body.classList.toggle("header-in", p > 0.45);
       document.body.classList.toggle("logo-in", end);
     }
