@@ -21,22 +21,32 @@
       var c = introLogo.getBoundingClientRect();
       introLogo.style.transform = prev;
       var h = introBrand.getBoundingClientRect();
+      var range = Math.max(1, intro.offsetHeight - introPin.offsetHeight);
+      /* if the pin has already scrolled past its sticky end, measurements are shifted up —
+         normalise them back to pinned (viewport-locked) space */
+      var shift = Math.max(0, window.scrollY - (intro.offsetTop + range));
       geo = {
         dx: (h.left + h.width / 2) - (c.left + c.width / 2),
-        dy: (h.top + h.height / 2) - (c.top + c.height / 2),
+        dy: (h.top + h.height / 2) - (c.top + shift + c.height / 2),
         s: h.height / c.height,
-        range: Math.max(1, intro.offsetHeight - introPin.offsetHeight)
+        range: range,
+        end: intro.offsetTop + range
       };
     }
     function introApply(p) {
+      /* keep the flight glued to the viewport even after the pin unsticks,
+         so the logo always completes its journey to the corner */
+      var shift = Math.max(0, window.scrollY - geo.end);
       introLogo.style.transform =
-        "translate(" + (geo.dx * p) + "px," + (geo.dy * p) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (geo.s - 1) * p) + ")";
-      /* crossfade: intro logo fades out over the last stretch while the header brand fades in */
-      var fade = p < 0.86 ? 1 : Math.max(0, 1 - (p - 0.86) / 0.1);
-      introLogo.style.opacity = fade.toFixed(3);
+        "translate(" + (geo.dx * p) + "px," + (geo.dy * p + shift) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (geo.s - 1) * p) + ")";
+      introLogo.style.setProperty("--glow", Math.max(0, 1 - p * 1.4).toFixed(3));
       if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 2.6).toFixed(3);
+      /* the swap: at p=1 the flying logo is pixel-identical to the header brand
+         (same SVG, 360° = upright, matched size + position), so an instant switch is invisible */
+      var landed = p >= 1;
+      introLogo.style.opacity = landed ? "0" : "1";
       document.body.classList.toggle("header-in", p > 0.45);
-      document.body.classList.toggle("logo-in", p > 0.88);
+      document.body.classList.toggle("logo-in", landed);
     }
     function introLoop() {
       introCur += (introTarget - introCur) * 0.13;
@@ -46,7 +56,7 @@
     }
     function introKick() {
       if (!geo || !geo.s) introMeasure();
-      introTarget = Math.min(1, Math.max(0, window.scrollY / geo.range));
+      introTarget = Math.min(1, Math.max(0, (window.scrollY - (geo.end - geo.range)) / geo.range));
       if (introCur === null) { introCur = introTarget; introApply(introCur); return; }
       if (introRaf === null && introCur !== introTarget) introRaf = requestAnimationFrame(introLoop);
     }
