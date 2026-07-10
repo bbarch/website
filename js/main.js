@@ -45,7 +45,11 @@
       var shift = Math.max(0, window.scrollY - geo.end);
       introLogo.style.transform =
         "translate(" + (dx * p) + "px," + (dy * p + shift) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (s - 1) * p) + ")";
-      introLogo.style.setProperty("--glow", Math.max(0, 1 - p * 1.4).toFixed(3));
+      var glow = Math.max(0, 1 - p * 1.4);
+      introLogo.style.setProperty("--glow", glow.toFixed(3));
+      /* drop the filter entirely once the glow is gone — an active filter (even at zero alpha)
+         can keep the element on its own compositor layer, rasterized differently to the brand */
+      introLogo.style.filter = glow === 0 ? "none" : "";
       if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 2.6).toFixed(3);
       /* the swap: at p=1 the flying logo is pixel-identical to the header brand
          (same SVG, 360° = upright, matched size + position), so an instant switch is invisible */

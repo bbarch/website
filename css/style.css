@@ -609,7 +609,10 @@ body.menu-open .menu nav a{opacity:1;transform:none}
 .intro{position:relative;height:180vh;background:var(--char);pointer-events:none}
 .intro__pin{position:sticky;top:0;height:100svh;display:flex;align-items:center;justify-content:center;z-index:1100}
 .intro__center{display:flex;flex-direction:column;align-items:center;gap:clamp(24px,4.5vh,44px)}
-.intro__logo{width:min(340px,66vw);height:auto;overflow:visible;transform-origin:center;will-change:transform;filter:drop-shadow(0 0 32px rgba(236,231,219,calc(.20*var(--glow,1)))) drop-shadow(0 0 11px rgba(236,231,219,calc(.16*var(--glow,1))))}
+/* NOTE: no will-change here — layer promotion caches the raster at full size and GPU-downscales
+   it during the flight, so the landed logo looks soft vs the crisp header brand (= swap flicker).
+   Left un-promoted, the SVG re-rasterizes crisply at every scale and the swap is pixel-identical. */
+.intro__logo{width:min(340px,66vw);height:auto;overflow:visible;transform-origin:center;filter:drop-shadow(0 0 32px rgba(236,231,219,calc(.20*var(--glow,1)))) drop-shadow(0 0 11px rgba(236,231,219,calc(.16*var(--glow,1))))}
 .intro__logo path{fill:var(--bone)}
 [data-theme="light"] .intro__logo{filter:drop-shadow(0 0 28px rgba(201,138,72,calc(.24*var(--glow,1)))) drop-shadow(0 0 9px rgba(0,0,0,calc(.10*var(--glow,1))))}
 .intro__cap{display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;will-change:opacity}
