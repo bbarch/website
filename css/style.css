@@ -178,7 +178,16 @@ figure.reveal-wipe.in img{transform:none}
   transition:background .5s var(--ease),padding .5s var(--ease),border-color .5s;
   border-bottom:1px solid transparent;
 }
-.site-header.scrolled{background:rgba(var(--veil-rgb),.82);backdrop-filter:blur(14px);padding-block:13px;border-color:var(--line-soft)}
+/* Veil + blur live on a pseudo-element and fade via OPACITY — backdrop-filter itself never
+   toggles, so the bar can't flash when the state changes mid-scroll */
+.site-header::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:rgba(var(--veil-rgb),.82);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  opacity:0;transition:opacity .5s var(--ease);
+}
+.site-header.scrolled::before{opacity:1}
+.site-header.scrolled{padding-block:13px;border-color:var(--line-soft)}
 .brand-logo{height:34px;width:auto;display:block}
 .brand-logo path,.footer-logo path{fill:var(--bone);transition:fill .5s}
 .menu-btn{
@@ -623,9 +632,10 @@ body.introjs.header-in .site-header{opacity:1;pointer-events:auto}
 /* The swap is instant and pixel-identical (same SVG, same spot), so it must NOT animate */
 body.introjs .site-header .brand{opacity:0}
 body.introjs.logo-in .site-header .brand{opacity:1}
-/* keep the header's glass blur OFF until the logo has landed — the flying logo must never
-   cross a backdrop-filter surface (repaint flicker in Chrome/Safari) */
-body.introjs:not(.logo-in) .site-header.scrolled{background:transparent;backdrop-filter:none;border-color:transparent}
+/* keep the header's veil hidden until the logo has landed; it then FADES in (opacity only —
+   never a blur on/off snap) */
+body.introjs:not(.logo-in) .site-header.scrolled::before{opacity:0}
+body.introjs:not(.logo-in) .site-header.scrolled{border-color:transparent}
 
 /* Entrance: intro centre fades in on page load (opacity only — no transform,
    so the flight geometry measured on load stays exact) */

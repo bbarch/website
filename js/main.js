@@ -14,7 +14,7 @@
     document.body.classList.add("introjs");
     var geo = null;
     var introPin = intro.querySelector(".intro__pin");
-    var introTarget = 0, introCur = null, introRaf = null, introLanded = false;
+    var introTarget = 0, introCur = null, introRaf = null, introLanded = false, introPrevT = null;
     function introMeasure() {
       var prev = introLogo.style.transform;
       introLogo.style.transform = "none";
@@ -63,11 +63,15 @@
       document.body.classList.toggle("header-in", p > 0.45);
       document.body.classList.toggle("logo-in", introLanded);
     }
-    function introLoop() {
-      introCur += (introTarget - introCur) * 0.13;
+    function introLoop(t) {
+      /* time-based easing: identical feel on 60Hz and 120Hz displays */
+      var dt = introPrevT === null ? 1 / 60 : Math.min(0.05, (t - introPrevT) / 1000);
+      introPrevT = t;
+      introCur += (introTarget - introCur) * (1 - Math.exp(-8.4 * dt));
       if (Math.abs(introTarget - introCur) < 0.0004) introCur = introTarget;
       introApply(introCur);
       introRaf = (introCur === introTarget) ? null : requestAnimationFrame(introLoop);
+      if (introRaf === null) introPrevT = null;
     }
     function introKick() {
       if (!geo) introMeasure();
