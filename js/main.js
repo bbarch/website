@@ -3,15 +3,18 @@
   "use strict";
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Scroll intro: logo on a solid page, rotates + glides to the corner on scroll ---------- */
+  /* ---------- Scroll intro: logo on a solid page, rotates + glides to the corner on scroll.
+       Scroll position is a *target*; the logo eases toward it every frame (lerp), so the
+       motion stays fluid even with jumpy wheel/trackpad input. Ends in a crossfade. ---------- */
   var intro = document.getElementById("intro");
   if (intro && !reduced) {
     var introLogo = document.getElementById("introLogo");
-    var introBrand = document.querySelector(".site-header .brand img");
+    var introBrand = document.querySelector(".site-header .brand-logo");
     var introCap = document.getElementById("introCap");
     document.body.classList.add("introjs");
     var geo = null;
     var introPin = intro.querySelector(".intro__pin");
+    var introTarget = 0, introCur = null, introRaf = null;
     function introMeasure() {
       var prev = introLogo.style.transform;
       introLogo.style.transform = "none";
@@ -25,24 +28,32 @@
         range: Math.max(1, intro.offsetHeight - introPin.offsetHeight)
       };
     }
-    function introFrame() {
-      if (!geo || !geo.s) introMeasure();
-      var p = Math.min(1, Math.max(0, window.scrollY / geo.range));
+    function introApply(p) {
       introLogo.style.transform =
         "translate(" + (geo.dx * p) + "px," + (geo.dy * p) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (geo.s - 1) * p) + ")";
-      var end = p > 0.98;
-      introLogo.style.opacity = end ? "0" : "1";
-      if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 3).toFixed(3);
+      /* crossfade: intro logo fades out over the last stretch while the header brand fades in */
+      var fade = p < 0.86 ? 1 : Math.max(0, 1 - (p - 0.86) / 0.1);
+      introLogo.style.opacity = fade.toFixed(3);
+      if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 2.6).toFixed(3);
       document.body.classList.toggle("header-in", p > 0.45);
-      document.body.classList.toggle("logo-in", end);
+      document.body.classList.toggle("logo-in", p > 0.88);
     }
-    var introTick = false;
-    window.addEventListener("scroll", function () {
-      if (!introTick) { requestAnimationFrame(function () { introFrame(); introTick = false; }); introTick = true; }
-    }, { passive: true });
-    window.addEventListener("resize", function () { geo = null; introFrame(); });
-    setTimeout(introFrame, 60);
-    introFrame();
+    function introLoop() {
+      introCur += (introTarget - introCur) * 0.13;
+      if (Math.abs(introTarget - introCur) < 0.0004) introCur = introTarget;
+      introApply(introCur);
+      introRaf = (introCur === introTarget) ? null : requestAnimationFrame(introLoop);
+    }
+    function introKick() {
+      if (!geo || !geo.s) introMeasure();
+      introTarget = Math.min(1, Math.max(0, window.scrollY / geo.range));
+      if (introCur === null) { introCur = introTarget; introApply(introCur); return; }
+      if (introRaf === null && introCur !== introTarget) introRaf = requestAnimationFrame(introLoop);
+    }
+    window.addEventListener("scroll", introKick, { passive: true });
+    window.addEventListener("resize", function () { geo = null; introKick(); });
+    setTimeout(introKick, 60);
+    introKick();
   }
 
   /* ---------- Theme toggle (dark / light) ---------- */
@@ -165,6 +176,37 @@
       });
       btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
     });
+  }
+
+  /* ---------- Card spotlight (cursor-tracked glow) ---------- */
+  if (window.matchMedia("(pointer: fine)").matches && !reduced) {
+    document.querySelectorAll(".cap,.pcard").forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+        card.style.setProperty("--my", (e.clientY - r.top) + "px");
+      }, { passive: true });
+    });
+  }
+
+  /* ---------- Marquee: leans with scroll velocity ---------- */
+  var marquee = document.querySelector(".marquee");
+  if (marquee && !reduced) {
+    var mLastY = window.scrollY, mSkew = 0, mRaf = null;
+    var mLoop = function () {
+      mSkew *= 0.9;
+      if (Math.abs(mSkew) < 0.05) {
+        mSkew = 0; marquee.style.transform = ""; mRaf = null; return;
+      }
+      marquee.style.transform = "skewX(" + mSkew.toFixed(2) + "deg)";
+      mRaf = requestAnimationFrame(mLoop);
+    };
+    window.addEventListener("scroll", function () {
+      var y = window.scrollY;
+      mSkew = Math.max(-10, Math.min(10, (y - mLastY) * 0.28));
+      mLastY = y;
+      if (mRaf === null) mRaf = requestAnimationFrame(mLoop);
+    }, { passive: true });
   }
 
   /* ---------- Image fallback ---------- */

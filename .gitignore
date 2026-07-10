@@ -10,3 +10,4 @@ images/logo-mask.png
 .DS_Store
 Thumbs.db
 *.log
+_archive/
