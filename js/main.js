@@ -14,7 +14,7 @@
     document.body.classList.add("introjs");
     var geo = null;
     var introPin = intro.querySelector(".intro__pin");
-    var introTarget = 0, introCur = null, introRaf = null;
+    var introTarget = 0, introCur = null, introRaf = null, introLanded = false;
     function introMeasure() {
       var prev = introLogo.style.transform;
       introLogo.style.transform = "none";
@@ -52,11 +52,16 @@
       introLogo.style.filter = glow === 0 ? "none" : "";
       if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 2.6).toFixed(3);
       /* the swap: at p=1 the flying logo is pixel-identical to the header brand
-         (same SVG, 360° = upright, matched size + position), so an instant switch is invisible */
-      var landed = p >= 1;
-      introLogo.style.opacity = landed ? "0" : "1";
+         (same SVG, 360° = upright, matched size + position), so an instant switch is invisible.
+         Hysteresis (re-arm only below .99) stops scroll jitter from re-triggering it. */
+      if (!introLanded && p >= 1) introLanded = true;
+      else if (introLanded && p < 0.99) introLanded = false;
+      introLogo.style.opacity = introLanded ? "0" : "1";
+      /* once landed, stop painting the intro overlay entirely — a live transparent layer
+         sliding over the header's backdrop blur causes repaint flicker while scrolling */
+      intro.style.visibility = introLanded ? "hidden" : "";
       document.body.classList.toggle("header-in", p > 0.45);
-      document.body.classList.toggle("logo-in", landed);
+      document.body.classList.toggle("logo-in", introLanded);
     }
     function introLoop() {
       introCur += (introTarget - introCur) * 0.13;

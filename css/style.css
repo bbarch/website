@@ -623,6 +623,9 @@ body.introjs.header-in .site-header{opacity:1;pointer-events:auto}
 /* The swap is instant and pixel-identical (same SVG, same spot), so it must NOT animate */
 body.introjs .site-header .brand{opacity:0}
 body.introjs.logo-in .site-header .brand{opacity:1}
+/* keep the header's glass blur OFF until the logo has landed — the flying logo must never
+   cross a backdrop-filter surface (repaint flicker in Chrome/Safari) */
+body.introjs:not(.logo-in) .site-header.scrolled{background:transparent;backdrop-filter:none;border-color:transparent}
 
 /* Entrance: intro centre fades in on page load (opacity only — no transform,
    so the flight geometry measured on load stays exact) */
