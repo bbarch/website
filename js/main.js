@@ -20,25 +20,31 @@
       introLogo.style.transform = "none";
       var c = introLogo.getBoundingClientRect();
       introLogo.style.transform = prev;
-      var h = introBrand.getBoundingClientRect();
       var range = Math.max(1, intro.offsetHeight - introPin.offsetHeight);
+      var end = intro.offsetTop + range;
       /* if the pin has already scrolled past its sticky end, measurements are shifted up —
          normalise them back to pinned (viewport-locked) space */
-      var shift = Math.max(0, window.scrollY - (intro.offsetTop + range));
+      var shift = Math.max(0, window.scrollY - end);
       geo = {
-        dx: (h.left + h.width / 2) - (c.left + c.width / 2),
-        dy: (h.top + h.height / 2) - (c.top + shift + c.height / 2),
-        s: h.height / c.height,
+        cx: c.left + c.width / 2,
+        cy: c.top + shift + c.height / 2,
+        ch: c.height,
         range: range,
-        end: intro.offsetTop + range
+        end: end
       };
     }
     function introApply(p) {
+      /* aim at the header brand's LIVE position every frame — the header compacts once
+         scrolled (padding transition), so a cached target would land a few px off */
+      var h = introBrand.getBoundingClientRect();
+      var dx = (h.left + h.width / 2) - geo.cx;
+      var dy = (h.top + h.height / 2) - geo.cy;
+      var s = h.height / geo.ch;
       /* keep the flight glued to the viewport even after the pin unsticks,
          so the logo always completes its journey to the corner */
       var shift = Math.max(0, window.scrollY - geo.end);
       introLogo.style.transform =
-        "translate(" + (geo.dx * p) + "px," + (geo.dy * p + shift) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (geo.s - 1) * p) + ")";
+        "translate(" + (dx * p) + "px," + (dy * p + shift) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (s - 1) * p) + ")";
       introLogo.style.setProperty("--glow", Math.max(0, 1 - p * 1.4).toFixed(3));
       if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 2.6).toFixed(3);
       /* the swap: at p=1 the flying logo is pixel-identical to the header brand
@@ -55,7 +61,7 @@
       introRaf = (introCur === introTarget) ? null : requestAnimationFrame(introLoop);
     }
     function introKick() {
-      if (!geo || !geo.s) introMeasure();
+      if (!geo) introMeasure();
       introTarget = Math.min(1, Math.max(0, (window.scrollY - (geo.end - geo.range)) / geo.range));
       if (introCur === null) { introCur = introTarget; introApply(introCur); return; }
       if (introRaf === null && introCur !== introTarget) introRaf = requestAnimationFrame(introLoop);
