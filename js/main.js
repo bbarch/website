@@ -3,27 +3,25 @@
   "use strict";
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Scroll intro: logo on a solid page, rotates + glides to the corner on scroll.
-       Scroll position is a *target*; the logo eases toward it every frame (lerp), so the
-       motion stays fluid even with jumpy wheel/trackpad input. Ends in a crossfade. ---------- */
+  /* ---------- Scroll intro: the HEADER BRAND ITSELF is the flying logo.
+       It starts centre-screen (big, rotated back a full turn) and eases into its natural
+       header position as you scroll. One element, no swap — so no swap can ever flicker.
+       The hidden #introLogo in the intro section only provides the start geometry. ---------- */
   var intro = document.getElementById("intro");
-  if (intro && !reduced) {
-    var introLogo = document.getElementById("introLogo");
-    var introBrand = document.querySelector(".site-header .brand-logo");
+  var introBrandA = document.querySelector(".site-header .brand");
+  var introBrandLogo = document.querySelector(".site-header .brand-logo");
+  if (intro && introBrandA && introBrandLogo && !reduced) {
+    var introLogo = document.getElementById("introLogo"); /* invisible size/position reference */
     var introCap = document.getElementById("introCap");
     document.body.classList.add("introjs");
     var geo = null;
     var introPin = intro.querySelector(".intro__pin");
     var introTarget = 0, introCur = null, introRaf = null, introLanded = false, introPrevT = null;
     function introMeasure() {
-      var prev = introLogo.style.transform;
-      introLogo.style.transform = "none";
-      var c = introLogo.getBoundingClientRect();
-      introLogo.style.transform = prev;
+      var c = introLogo.getBoundingClientRect(); /* visibility:hidden but still laid out */
       var range = Math.max(1, intro.offsetHeight - introPin.offsetHeight);
       var end = intro.offsetTop + range;
-      /* if the pin has already scrolled past its sticky end, measurements are shifted up —
-         normalise them back to pinned (viewport-locked) space */
+      /* if the pin has scrolled past its sticky end, normalise back to viewport-locked space */
       var shift = Math.max(0, window.scrollY - end);
       geo = {
         cx: c.left + c.width / 2,
@@ -34,32 +32,23 @@
       };
     }
     function introApply(p) {
-      /* aim at the header brand's LIVE position every frame — the header compacts once
-         scrolled (padding transition), so a cached target would land a few px off */
-      var h = introBrand.getBoundingClientRect();
-      var dx = (h.left + h.width / 2) - geo.cx;
-      var dy = (h.top + h.height / 2) - geo.cy;
-      var s = h.height / geo.ch;
-      /* keep the flight glued to the viewport even after the pin unsticks,
-         so the logo always completes its journey to the corner */
-      var shift = Math.max(0, window.scrollY - geo.end);
-      introLogo.style.transform =
-        "translate(" + (dx * p) + "px," + (dy * p + shift) + "px) rotate(" + (360 * p) + "deg) scale(" + (1 + (s - 1) * p) + ")";
-      var glow = Math.max(0, 1 - p * 1.4);
-      introLogo.style.setProperty("--glow", glow.toFixed(3));
-      /* drop the filter entirely once the glow is gone — an active filter (even at zero alpha)
-         can keep the element on its own compositor layer, rasterized differently to the brand */
-      introLogo.style.filter = glow === 0 ? "none" : "";
-      if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 2.6).toFixed(3);
-      /* the swap: at p=1 the flying logo is pixel-identical to the header brand
-         (same SVG, 360° = upright, matched size + position), so an instant switch is invisible.
-         Hysteresis (re-arm only below .99) stops scroll jitter from re-triggering it. */
+      /* hysteresis only decides when the transform is pinned to exactly zero */
       if (!introLanded && p >= 1) introLanded = true;
       else if (introLanded && p < 0.99) introLanded = false;
-      introLogo.style.opacity = introLanded ? "0" : "1";
-      /* once landed, stop painting the intro overlay entirely — a live transparent layer
-         sliding over the header's backdrop blur causes repaint flicker while scrolling */
-      intro.style.visibility = introLanded ? "hidden" : "";
+      if (introLanded) {
+        introBrandLogo.style.transform = "";
+        introBrandLogo.style.setProperty("--glow", "0");
+      } else {
+        var q = 1 - p; /* reverse progress: 1 = centre of screen, 0 = seated in header */
+        var h = introBrandA.getBoundingClientRect(); /* anchor = natural spot; unaffected by the svg's transform */
+        var dx = geo.cx - (h.left + h.width / 2);
+        var dy = geo.cy - (h.top + h.height / 2);
+        var S = geo.ch / h.height;
+        introBrandLogo.style.transform =
+          "translate(" + (dx * q) + "px," + (dy * q) + "px) rotate(" + (-360 * q) + "deg) scale(" + (1 + (S - 1) * q) + ")";
+        introBrandLogo.style.setProperty("--glow", Math.max(0, 1 - p * 1.4).toFixed(3));
+      }
+      if (introCap) introCap.style.opacity = Math.max(0, 1 - p * 2.6).toFixed(3);
       document.body.classList.toggle("header-in", p > 0.45);
       document.body.classList.toggle("logo-in", introLanded);
     }
