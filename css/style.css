@@ -598,6 +598,7 @@ body.menu-open .menu nav a{opacity:1;transform:none}
 [data-theme="light"] .prj-hero__bg img{filter:grayscale(.12)}
 [data-theme="light"] .band img{filter:grayscale(.1) contrast(1) brightness(1.05)}
 [data-theme="light"] .gcard img{filter:grayscale(.75) contrast(1.03) brightness(.9)}
+[data-theme="light"] .gcard:hover img{filter:grayscale(0) contrast(1.02) brightness(1)}
 [data-theme="light"] .strip img{filter:grayscale(.12) brightness(1)}
 
 /* ---------- Light theme: stronger veil under hero text for legibility ---------- */
