@@ -646,5 +646,7 @@ body.introjs .intro__center{animation:introIn 1.4s var(--ease) both}
 @media (prefers-reduced-motion:reduce){.intro{display:none}}
 
 /* ---------- Bands with sharp edges (no page-fade) ---------- */
-.band--sharp::after{display:none}
+/* Keep the ::after overlay painted (just fully transparent) — removing it with
+   display:none drops the sibling image under clip-path + will-change compositing. */
+.band--sharp::after{background:linear-gradient(180deg,transparent,transparent)}
 .band--sharp .band__cap{color:#ece7db;text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.45)}
