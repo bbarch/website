@@ -403,9 +403,7 @@ body.menu-open .menu nav a{opacity:1;transform:none}
 
 /* ---------- Gallery: feature (colour) cards ---------- */
 .gcard--feature{grid-column:span 2;grid-row:span 2}
-.gcard--feature img{filter:grayscale(0) contrast(1.03) brightness(.98) saturate(1.04)}
-.gcard--feature:hover img{filter:grayscale(0) brightness(1.03);transform:scale(1.05)}
-.gcard--feature figcaption{opacity:1;transform:none;font-size:.7rem;padding-top:64px}
+.gcard--feature figcaption{font-size:.7rem;padding-top:64px}
 @media (max-width:1000px){.gcard--feature figcaption{font-size:.64rem}}
 @media (max-width:560px){
   .gcard--feature,.gcard--wide,.gcard--tall{grid-column:auto;grid-row:auto}
@@ -600,7 +598,6 @@ body.menu-open .menu nav a{opacity:1;transform:none}
 [data-theme="light"] .prj-hero__bg img{filter:grayscale(.12)}
 [data-theme="light"] .band img{filter:grayscale(.1) contrast(1) brightness(1.05)}
 [data-theme="light"] .gcard img{filter:grayscale(.18) contrast(1.02) brightness(.96)}
-[data-theme="light"] .gcard--feature img{filter:grayscale(0) contrast(1.02) brightness(1)}
 [data-theme="light"] .strip img{filter:grayscale(.12) brightness(1)}
 
 /* ---------- Light theme: stronger veil under hero text for legibility ---------- */
