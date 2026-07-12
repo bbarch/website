@@ -279,6 +279,7 @@ body.menu-open .menu nav a{opacity:1;transform:none}
 .btn:hover::before{transform:scaleY(1)}
 .btn .arrow{transition:transform .45s var(--ease)}
 .btn:hover .arrow{transform:translateX(6px)}
+.btn--back:hover .arrow{transform:translateX(-6px)}
 .btn--solid{background:var(--bone);color:var(--char);border-color:var(--bone)}
 .btn--solid::before{background:var(--brass)}
 .btn--solid:hover{border-color:var(--brass)}
