@@ -439,8 +439,8 @@ body.menu-open .menu nav a{opacity:1;transform:none}
 /* ---------- Project list: items with a detail page ---------- */
 .pcat__list li.has-page>a{
   color:var(--bone);
-  text-decoration:underline;text-decoration-color:var(--brass-soft);
-  text-underline-offset:4px;text-decoration-thickness:1px;
+  text-decoration:underline;text-decoration-color:var(--brass);
+  text-underline-offset:4px;text-decoration-thickness:2px;
   transition:color .3s,text-decoration-color .3s;
 }
 .pcat__list li.has-page>a:hover{color:var(--brass);text-decoration-color:var(--brass)}
