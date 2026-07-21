@@ -122,6 +122,11 @@
           </div>
           <div class="field"><label for="em">Email *</label><input id="em" type="email" name="email" autocomplete="email" required></div>
           <div class="field"><label for="cm">Comment *</label><textarea id="cm" name="comment" required></textarea></div>
+          <!-- Honeypot: hidden from humans, tempting to bots. Leave blank. -->
+          <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden" tabindex="-1">
+            <label for="website">Website (leave this field empty)</label>
+            <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <button class="btn btn--solid" type="submit" id="submitBtn">Submit <span class="arrow">→</span></button>
           <p id="formStatus" style="margin-top:16px;color:#d8c3a5;"></p>
           <p class="form-note">* Indicates a required field. Prefer email? Write to us directly at <a href="mailto:info@bbarch.net">info@bbarch.net</a>.</p>
@@ -190,6 +195,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const endpoint = "https://script.google.com/macros/s/AKfycbzIYTiZYquGrHCak7S56xVjduEdWKrq0A2LYd_81NzOZDu5M0Xhf8Tf91_NGc3EvJnq/exec";
 
+  // Anti-spam: record when the form became available to a real visitor.
+  const formLoadedAt = Date.now();
+  const MIN_FILL_MS = 3000; // humans take longer than 3s to fill this out
+
   function restoreButton() {
     btn.disabled = false;
     btn.innerHTML = originalBtn;
@@ -197,6 +206,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
+
+    // Anti-spam gate 1: honeypot. Bots fill hidden fields; humans never see them.
+    // Anti-spam gate 2: timing. Bots submit near-instantly.
+    // Fail silently — show a success message so bots get no signal to adapt.
+    const honeypot = form.website ? form.website.value.trim() : "";
+    const tooFast = (Date.now() - formLoadedAt) < MIN_FILL_MS;
+    if (honeypot !== "" || tooFast) {
+      form.reset();
+      status.style.color = "#3a7d44";
+      status.textContent = "✓ Thank you. Your message has been sent.";
+      return;
+    }
 
     btn.disabled = true;
     btn.innerHTML = "Sending...";
